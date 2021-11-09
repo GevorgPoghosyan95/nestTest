@@ -1,10 +1,32 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import {Module} from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import {SequelizeModule} from '@nestjs/sequelize';
+import { UsersModule } from './users/users.module';
+import {User} from "./users/users.model";
+import { RolesModule } from './roles/roles.module';
+import {Role} from "./roles/roles.model";
+import {UserRoles} from "./roles/user-roles.model";
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [
+        ConfigModule.forRoot({
+            envFilePath:'.env'
+        }),
+        SequelizeModule.forRoot({
+            dialect: 'mysql',
+            host: 'localhost',
+            port: 3306,
+            username: 'root',
+            password: '',
+            database: 'nesttest',
+            models: [User,Role,UserRoles],
+            autoLoadModels:true
+        }),
+        UsersModule,
+        RolesModule
+    ],
+    controllers: [],
+    providers: [],
 })
-export class AppModule {}
+export class AppModule {
+}
