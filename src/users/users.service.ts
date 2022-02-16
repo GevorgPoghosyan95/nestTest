@@ -12,13 +12,19 @@ export class UsersService {
 
     async createUser(createUserRequest:CreateUserRequest){
         const user = await this.userRepository.create(createUserRequest)
-        const role = await this.roleService.getRoleByValue("USER")
+        const role = await this.roleService.getRoleByValue(createUserRequest.role)
         await user.$set('roles',[role.id])
+        user.roles = [role]
         return user;
     }
 
     async getAllUsers(){
         const  users = await this.userRepository.findAll({include:{all:true}});
         return users;
+    }
+
+    async getUserByEmail(email:string){
+        const user = await this.userRepository.findOne({where:{email},include:{all:true}})
+        return user;
     }
 }

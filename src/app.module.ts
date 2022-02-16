@@ -6,11 +6,13 @@ import {User} from "./users/users.model";
 import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
+import { AuthModule } from './auth/auth.module';
+
 
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath:'.env'
+            envFilePath:'.env',
         }),
         SequelizeModule.forRoot({
             dialect: 'mysql',
@@ -23,7 +25,8 @@ import {UserRoles} from "./roles/user-roles.model";
             autoLoadModels:true
         }),
         UsersModule,
-        RolesModule
+        RolesModule,
+        AuthModule
     ],
     controllers: [],
     providers: [],

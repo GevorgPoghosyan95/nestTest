@@ -1,9 +1,13 @@
-import {IsEmail, IsNotEmpty} from "class-validator";
+import {IsEmail, IsNotEmpty, IsString} from "class-validator";
 
 export class CreateUserRequest {
-    @IsEmail()
+    @IsEmail({},{message:"Incorrect email"})
+    @IsString({message:'Must be string'})
     email: string;
 
     @IsNotEmpty()
     password: string;
+
+    @IsNotEmpty()
+    role: string;
 }
