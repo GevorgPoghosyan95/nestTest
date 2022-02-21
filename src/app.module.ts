@@ -7,9 +7,13 @@ import { RolesModule } from './roles/roles.module';
 import {Role} from "./roles/roles.model";
 import {UserRoles} from "./roles/user-roles.model";
 import { AuthModule } from './auth/auth.module';
-
+import {GraphQLModule} from "@nestjs/graphql";
+import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
+import { join } from 'path';
+import {CatsModule} from "./cats/cats.module";
 
 @Module({
+
     imports: [
         ConfigModule.forRoot({
             envFilePath:'.env',
@@ -26,7 +30,12 @@ import { AuthModule } from './auth/auth.module';
         }),
         UsersModule,
         RolesModule,
-        AuthModule
+        AuthModule,
+        // GraphQLModule.forRoot({
+        //     driver: ApolloDriver,
+        //     autoSchemaFile: true,
+        // }),
+        // CatsModule
     ],
     controllers: [],
     providers: [],

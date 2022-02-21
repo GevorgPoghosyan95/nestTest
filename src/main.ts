@@ -1,10 +1,11 @@
-import { NestFactory } from '@nestjs/core';
+import {LazyModuleLoader, NestFactory} from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.get(LazyModuleLoader);
   const config = new DocumentBuilder()
       .setTitle('backend')
       .setDescription('rest api docs')
