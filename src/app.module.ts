@@ -11,6 +11,7 @@ import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
 import { join } from 'path';
 import {CatsModule} from "./cats/cats.module";
+import {FilesModule} from "./file/files.module";
 
 @Module({
 
@@ -31,6 +32,7 @@ import {CatsModule} from "./cats/cats.module";
         UsersModule,
         RolesModule,
         AuthModule,
+        FilesModule,
         // GraphQLModule.forRoot({
         //     driver: ApolloDriver,
         //     autoSchemaFile: true,
